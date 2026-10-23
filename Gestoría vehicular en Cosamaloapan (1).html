@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gestoría vehicular en Cosamaloapan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#14213d; --paper:#f6f5ef; --card:#ffffff; --line:#d9d7cb;
+  --accent:#f2b705; --accent-ink:#14213d; --ok:#1b7f5c; --muted:#4b5566;
+  --head:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ink:#f3f1e7; --paper:#0f1626; --card:#18233a; --line:#2b3855;
+    --accent:#f2b705; --accent-ink:#14213d; --ok:#4cc59a; --muted:#a9b3c7;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#f3f1e7; --paper:#0f1626; --card:#18233a; --line:#2b3855;
+  --accent:#f2b705; --accent-ink:#14213d; --ok:#4cc59a; --muted:#a9b3c7;
+  color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 var(--body)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:var(--head);line-height:1.08;margin:0}
+h1{font-weight:800;font-size:clamp(2.3rem,7.5vw,4.4rem);letter-spacing:-.02em;max-width:14ch}
+h2{font-weight:800;font-size:clamp(1.6rem,4.5vw,2.4rem);letter-spacing:-.01em;margin-bottom:.5em}
+h3{font-weight:500;font-size:1.15rem}
+p{margin:0 0 1em;max-width:62ch}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+
+header.top{padding:18px 0}
+header.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{font-family:var(--head);font-weight:800;font-size:1.1rem;text-decoration:none}
+
+.hero{padding:28px 0 56px}
+.hero .wrap{display:grid;gap:36px;align-items:center}
+@media(min-width:820px){.hero .wrap{grid-template-columns:1.2fr .8fr}}
+.lede{font-size:1.15rem;color:var(--muted);margin-top:18px}
+.btn{display:inline-block;background:var(--accent);color:var(--accent-ink);font:600 1rem var(--body);
+  padding:14px 22px;border-radius:10px;border:0;text-decoration:none;cursor:pointer;min-height:48px}
+.btn:hover{filter:brightness(.95)}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+
+/* La placa: elemento memorable */
+.plate{background:var(--accent);color:var(--accent-ink);border:5px solid var(--ink);border-radius:16px;
+  padding:18px 20px 22px;transform:rotate(-2deg);box-shadow:6px 6px 0 var(--ink)}
+.plate .top{display:flex;justify-content:space-between;font:600 .85rem var(--body)}
+.plate .mid{font-family:var(--head);font-weight:800;font-size:clamp(2.2rem,9vw,3.3rem);letter-spacing:.04em;text-align:center;padding:10px 0 4px}
+.plate .bot{text-align:center;font:600 .9rem var(--body)}
+.checks{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:8px}
+.checks li{display:flex;gap:10px;align-items:center;font-weight:600}
+.checks li::before{content:"✓";display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--ok);color:#fff;font-size:.85rem;flex:none}
+
+section{padding:56px 0;border-top:1px solid var(--line)}
+.services{display:grid;gap:14px;margin-top:22px}
+@media(min-width:640px){.services{grid-template-columns:1fr 1fr}}
+@media(min-width:900px){.services{grid-template-columns:repeat(3,1fr)}}
+.svc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
+.svc p{margin:.4em 0 0;color:var(--muted);font-size:.95rem}
+
+.steps{list-style:none;counter-reset:s;margin:22px 0 0;padding:0;display:grid;gap:16px}
+@media(min-width:760px){.steps{grid-template-columns:repeat(4,1fr)}}
+.steps li{counter-increment:s;border-left:4px solid var(--accent);padding:2px 0 2px 14px}
+.steps li::before{content:"Paso " counter(s);display:block;font:600 .85rem var(--body);color:var(--muted)}
+.steps b{font-family:var(--head);font-weight:500;font-size:1.1rem;display:block}
+.steps span{color:var(--muted);font-size:.95rem}
+
+.contact{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;display:grid;gap:14px;max-width:560px}
+label{font-weight:600;font-size:.95rem;display:block;margin-bottom:6px}
+select,input,textarea{width:100%;font:400 1rem var(--body);color:var(--ink);background:var(--paper);
+  border:2px solid var(--line);border-radius:10px;padding:12px;min-height:48px}
+textarea{min-height:90px;resize:vertical}
+.note{font-size:.9rem;color:var(--muted);margin:0}
+#msg{font-weight:600;color:var(--ok);min-height:1.4em;margin:0}
+
+footer{padding:32px 0 48px;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+footer p{max-width:70ch}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="#">Gestoría Vehicular</a>
+  <a class="btn ghost" href="#contacto">Escríbeme</a>
+</div></header>
+
+<main>
+<section class="hero" style="border:0;padding-top:28px"><div class="wrap">
+  <div>
+    <h1>Tus trámites vehiculares, sin filas ni vueltas.</h1>
+    <p class="lede">Me encargo de tus papeles del vehículo en Cosamaloapan y la región. Me cuentas tu caso, reviso qué necesitas y te lo resuelvo con claridad en cada paso.</p>
+    <div class="actions">
+      <a class="btn" href="#contacto">Cuéntame tu trámite</a>
+      <a class="btn ghost" href="#servicios">Ver trámites</a>
+    </div>
+    <ul class="checks">
+      <li>Revisión de documentos antes de ir a la oficina</li>
+      <li>Te explico qué sigue y qué falta</li>
+      <li>Atención directa por WhatsApp</li>
+    </ul>
+  </div>
+  <div class="plate" aria-hidden="true">
+    <div class="top"><span>VERACRUZ</span><span>TRÁMITE EN ORDEN</span></div>
+    <div class="mid">SIN·FILAS</div>
+    <div class="bot">Papeles al día, tranquilidad en el camino</div>
+  </div>
+</div></section>
+
+<section id="servicios"><div class="wrap">
+  <h2>Trámites en los que te ayudo</h2>
+  <p>Si no ves el tuyo, pregúntame: muchos casos tienen detalles particulares.</p>
+  <div class="services">
+    <div class="svc"><h3>Alta de placas</h3><p>Para vehículos nuevos o que vienen de otro estado.</p></div>
+    <div class="svc"><h3>Cambio de propietario</h3><p>Compraventa de vehículos entre particulares.</p></div>
+    <div class="svc"><h3>Refrendo y pagos vehiculares</h3><p>Ponte al corriente con tus obligaciones.</p></div>
+    <div class="svc"><h3>Baja de placas</h3><p>Cuando vendes, cambias de estado o das de baja el vehículo.</p></div>
+    <div class="svc"><h3>Reposición de documentos</h3><p>Tarjeta de circulación, placas o documentos extraviados o dañados.</p></div>
+    <div class="svc"><h3>Licencia de conducir</h3><p>Orientación sobre el trámite y los documentos que necesitas.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Así trabajamos</h2>
+  <ol class="steps">
+    <li><b>Me cuentas tu caso</b><span>Por WhatsApp o con el formulario.</span></li>
+    <li><b>Reviso tus documentos</b><span>Te digo exactamente qué tienes y qué falta.</span></li>
+    <li><b>Realizo el trámite</b><span>Te aviso de los avances.</span></li>
+    <li><b>Te entrego resultados</b><span>Con tus documentos en regla.</span></li>
+  </ol>
+  <p class="note" style="margin-top:20px">Los requisitos y costos oficiales pueden cambiar según el trámite y la oficina. Te los confirmo antes de empezar.</p>
+</div></section>
+
+<section id="contacto"><div class="wrap">
+  <h2>¿Qué trámite necesitas?</h2>
+  <p>Elige el trámite y te abro un mensaje de WhatsApp ya escrito, solo tienes que enviarlo.</p>
+  <div class="contact">
+    <div>
+      <label for="tramite">Trámite</label>
+      <select id="tramite">
+        <option>Alta de placas</option>
+        <option>Cambio de propietario</option>
+        <option>Refrendo y pagos vehiculares</option>
+        <option>Baja de placas</option>
+        <option>Reposición de documentos</option>
+        <option>Licencia de conducir</option>
+        <option>Otro trámite</option>
+      </select>
+    </div>
+    <div>
+      <label for="nombre">Tu nombre</label>
+      <input id="nombre" autocomplete="name">
+    </div>
+    <div>
+      <label for="detalle">Cuéntame tu caso (opcional)</label>
+      <textarea id="detalle" placeholder="Ejemplo: compré un auto de otro estado y no sé por dónde empezar."></textarea>
+    </div>
+    <button class="btn" id="enviar" type="button">Enviar por WhatsApp</button>
+    <p id="msg" role="status"></p>
+    <p class="note">No pidas ni envíes datos personales sensibles por aquí; los documentos los revisamos ya en la conversación.</p>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <p>Servicio de gestoría y orientación para trámites vehiculares. No soy una oficina de gobierno; los trámites se realizan ante las autoridades correspondientes y sus costos oficiales se pagan directamente a ellas.</p>
+</div></footer>
+
+<script>
+// Cambia este número por el WhatsApp real, con lada de país (México: 52) y sin espacios.
+var WHATSAPP = "522888857776";
+document.getElementById("enviar").addEventListener("click", function(){
+  var t = document.getElementById("tramite").value;
+  var n = document.getElementById("nombre").value.trim();
+  var d = document.getElementById("detalle").value.trim();
+  var texto = "Hola, necesito ayuda con: " + t + "." + (n ? " Soy " + n + "." : "") + (d ? " " + d : "");
+  var msg = document.getElementById("msg");
+  if (WHATSAPP.indexOf("X") !== -1) {
+    msg.style.color = "inherit";
+    msg.textContent = "Pronto estará disponible el contacto por WhatsApp.";
+    return;
+  }
+  msg.style.color = "";
+  msg.textContent = "Abriendo WhatsApp…";
+  window.open("https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(texto), "_blank", "noopener");
+});
+</script>
+</body>
+</html>
